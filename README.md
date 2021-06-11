@@ -1,24 +1,72 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル (ユーザー管理機能)
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| password           | string | null: false |
+| first name         | string | null: false |
+| last name          | string | null: false |
+| first name kana    | string | null: false |
+| last name kana     | string | null: false |
+| birth date         |references| null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :purchase
 
-* Configuration
+##  item テーブル (商品出品機能)
 
-* Database creation
+| Column                 | Type      | Options     |
+| ---------------------- | --------- | ----------- |
+| image                  |           | null: false |
+| name                   | string    | null: false |
+| info                   | text      | null: false |
+| price                  | integer   | null: false |
+| category               |references | null: false |
+| sales status           |references | null: false |
+| shipping fee status    |references | null: false |
+| prefecture             |references | null: false |
+| scheduled delivery     |references | null: false |
+| user                   |references |             |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user 
+- has_one :purchase
+ 
+## purchase テーブル (商品購入機能)
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| token              |           | null: false |
+| user               | references|             |
 
-* Deployment instructions
+### Association
 
-* ...
+- belongs_to :user
+- belongs_to :items
+- has_one :address
+
+
+
+## address テーブル (配送先住所)
+
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| postal code        | integer   | null: false |
+| prefecture         |references | null: false |
+| city               |  string   | null: false |
+| addresses          |  string   | null: false |
+| phone number       |  integer  | null: false |
+
+### Association
+
+- belongs_to :purchase
+
+
+
+
