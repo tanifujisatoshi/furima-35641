@@ -5,32 +5,31 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string | null: false |
-| password           | string | null: false |
-| first name         | string | null: false |
-| last name          | string | null: false |
-| first name kana    | string | null: false |
-| last name kana     | string | null: false |
-| birth date         |references| null: false |
+| email              | string |unique: true |
+| encrypted_password | string | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| first_name_kana    | string | null: false |
+| last_name_kana     | string | null: false |
+| birth_date         |  date  | null: false |
 
 ### Association
 
 - has_many :items
-- has_many :purchase
+- has_many :purchases
 
-##  item テーブル (商品出品機能)
+##  items テーブル (商品出品機能)
 
 | Column                 | Type      | Options     |
 | ---------------------- | --------- | ----------- |
-| image                  |           | null: false |
 | name                   | string    | null: false |
 | info                   | text      | null: false |
 | price                  | integer   | null: false |
-| category               |references | null: false |
-| sales status           |references | null: false |
-| shipping fee status    |references | null: false |
-| prefecture             |references | null: false |
-| scheduled delivery     |references | null: false |
+| category_id            | integer   | null: false |
+| sales_status_id        | integer   | null: false |
+| shipping_fee_status_id | integer   | null: false |
+| prefecture_id          | integer   | null: false |
+| scheduled_delivery_id  | integer   | null: false |
 | user                   |references |             |
 
 ### Association
@@ -38,30 +37,31 @@
 - belongs_to :user 
 - has_one :purchase
  
-## purchase テーブル (商品購入機能)
+## purchases テーブル (商品購入機能)
 
-| Column             | Type      | Options     |
-| ------------------ | --------- | ----------- |
-| token              |           | null: false |
-| user               | references|             |
+| Column             | Type      | Options         |
+| ------------------ | --------- | ----------------|
+| user               | references|foreign_key :true|
+| item               | references|foreign_key :true|
 
 ### Association
 
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 - has_one :address
 
 
 
-## address テーブル (配送先住所)
+## addresses テーブル (配送先住所)
 
 | Column             | Type      | Options     |
 | ------------------ | --------- | ----------- |
-| postal code        | integer   | null: false |
-| prefecture         |references | null: false |
+| postal_code        | string    | null: false |
+| prefecture_id      | integer   | null: false |
 | city               |  string   | null: false |
 | addresses          |  string   | null: false |
-| phone number       |  integer  | null: false |
+| building           |  string   |             |
+| phone_number       |  string   | null: false |
 
 ### Association
 
