@@ -30,7 +30,7 @@
 | shipping_fee_status_id | integer   | null: false |
 | prefecture_id          | integer   | null: false |
 | scheduled_delivery_id  | integer   | null: false |
-| user                   |references |             |
+| user                   |references |foreign_key :true|
 
 ### Association
 
@@ -41,8 +41,9 @@
 
 | Column             | Type      | Options         |
 | ------------------ | --------- | ----------------|
-| user               | references|foreign_key :true|
-| item               | references|foreign_key :true|
+| user_id            | references|foreign_key :true|
+| item_id            | references|foreign_key :true|
+| address_id         | references|foreign_key :true|
 
 ### Association
 
