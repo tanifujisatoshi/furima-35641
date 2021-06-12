@@ -43,7 +43,6 @@
 | ------------------ | --------- | ----------------|
 | user               | references|foreign_key :true|
 | item               | references|foreign_key :true|
-| address            |references |foreign_key :true|
 
 ### Association
 
@@ -63,6 +62,7 @@
 | addresses          |  string   | null: false |
 | building           |  string   |             |
 | phone_number       |  string   | null: false |
+| purchase           |references |foreign_key :true |
 
 ### Association
 
