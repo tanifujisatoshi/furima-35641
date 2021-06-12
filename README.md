@@ -5,7 +5,7 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string |unique: true |
+| email              | string |unique: true, null: false |
 | encrypted_password | string | null: false |
 | first_name         | string | null: false |
 | last_name          | string | null: false |
@@ -43,6 +43,7 @@
 | ------------------ | --------- | ----------------|
 | user               | references|foreign_key :true|
 | item               | references|foreign_key :true|
+| address            |references |foreign_key :true|
 
 ### Association
 
