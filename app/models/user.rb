@@ -9,8 +9,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
   validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
   validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-  validates :first_name_kana, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-  validates :last_name_kana, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
+  validates :first_name_kana, presence: true, format: { with: /[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+/ }
+  validates :last_name_kana, presence: true, format: { with: /[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+/ }
   validates :birth_date, presence: true
 
   has_many :items
