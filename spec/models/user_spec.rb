@@ -78,6 +78,13 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
          end
 
+         it 'passwordが正常でもpassword_confirmationが空だと登録できないこと' do
+          @user.password = 'satoshi1234'
+          @user.password_confirmation = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+         end
+
          it 'passwordが5文字以下だと登録できないこと' do
           @user.password = 'sa12'
           @user.password_confirmation = 'sa12'
