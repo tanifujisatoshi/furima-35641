@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
-     before do
-     @user = FactoryBot.build(:user)
-     end
+    before do
+      @user = FactoryBot.build(:user)
+    end
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -14,16 +14,16 @@ RSpec.describe User, type: :model do
       @user.email = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
-    end 
+    end
     it 'passwordが空では登録できない' do
       @user.password = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it 'passwordが半角英数字を含み6文字以上であれば登録できること' do
-       @user.password = 'abc123'
-       @user.password_confirmation = 'abc123'
-       expect(@user).to be_valid
+      @user.password = 'abc123'
+      @user.password_confirmation = 'abc123'
+      expect(@user).to be_valid
     end
     it 'last_nameが空では登録できない' do
       @user.last_name = ''
@@ -66,9 +66,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth date can't be blank")
     end
-
-
-
-
   end
+
+
 end
