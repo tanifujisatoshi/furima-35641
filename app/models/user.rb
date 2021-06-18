@@ -7,22 +7,18 @@ class User < ApplicationRecord
   has_many :purchases
 
   with_options presence: true do
-   validates :nickname 
-   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
+    validates :nickname
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
 
-  with_options format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ } do
-   validates :first_name
-   validates :last_name
-  end
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ } do
+      validates :first_name
+      validates :last_name
+    end
 
-  with_options format: { with: /[\p{katakana} ー－&&[^ -~｡-ﾟ]]+/ } do
-   validates :first_name_kana
-   validates :last_name_kana
-  end
-   validates :birth_date
-   
+    with_options format: { with: /[\p{katakana} ー－&&[^ -~｡-ﾟ]]+/ } do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
+    validates :birth_date
   end
 end
-
-  
-
