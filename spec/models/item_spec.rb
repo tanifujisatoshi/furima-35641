@@ -6,7 +6,6 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品機能' do
-
     context '商品出品がうまくいくとき' do
       it 'imageがあれば登録できること' do
         expect(@item).to be_valid
@@ -23,7 +22,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idで---以外を選択すると登録できること' do
-         @item.category_id = 2
+        @item.category_id = 2
         expect(@item).to be_valid
       end
 
@@ -53,7 +52,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが半角数字であれば登録できること' do
-        @item.price = 30000
+        @item.price = 30_000
         expect(@item).to be_valid
       end
     end
@@ -74,34 +73,31 @@ RSpec.describe Item, type: :model do
       it 'category_idで---を選択すると登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it 'prefecture_idで---を選択すると登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it 'shipping_fee_status_idで---を選択すると登録できない' do
         @item.shipping_fee_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee status must be other than 1")
-                                                      
+        expect(@item.errors.full_messages).to include('Shipping fee status must be other than 1')
       end
 
       it 'sales_status_idで---を選択すると登録できない' do
         @item.sales_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales status must be other than 1")
-                                                      
+        expect(@item.errors.full_messages).to include('Sales status must be other than 1')
       end
 
       it 'scheduled_delivery_idで---を選択すると登録できない' do
         @item.scheduled_delivery_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Scheduled delivery must be other than 1")
-                                                      
+        expect(@item.errors.full_messages).to include('Scheduled delivery must be other than 1')
       end
 
       it 'priceが空だと登録できない' do
@@ -117,7 +113,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが9999999より大きいと登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is invalid')
       end
@@ -129,15 +125,15 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが英数字混合だと登録できないこと' do
-       @item.price = '123abc'
+        @item.price = '123abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid") 
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
 
       it 'priceが半角英字では登録できないこと' do
         @item.price = 'abcdef'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid") 
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
 
       it 'imageが空だと登録できない' do
