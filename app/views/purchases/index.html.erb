@@ -10,7 +10,7 @@
       <%= image_tag @item.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
-          <%=  %>
+          <%= @item.name %>
         </h2>
         <div class='buy-item-price'>
           <p class='item-price-text'>¥<%= @item.price %></p>
@@ -92,7 +92,7 @@
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
-        <%#= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
+        
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>

@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   
    before do
-    @purchase_address = FactoryBot.build(:purchase_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
+    sleep 0.1
   end
 
   describe '配送先入力' do
@@ -14,7 +17,7 @@ RSpec.describe PurchaseAddress, type: :model do
       end
 
       it 'prefecture_idで---以外を選択すれば登録できること' do
-        @purchase_address.prefecture_id = '3'
+        @purchase_address.prefecture_id = 3
         expect(@purchase_address).to be_valid
       end
       
@@ -25,6 +28,11 @@ RSpec.describe PurchaseAddress, type: :model do
 
       it 'addressesがあれば登録できること' do
         @purchase_address.addresses = '3地割14番地5'
+        expect(@purchase_address).to be_valid
+      end
+
+      it 'buildingが無くても登録できること' do
+        @purchase_address.building = ''
         expect(@purchase_address).to be_valid
       end
 
@@ -48,7 +56,7 @@ RSpec.describe PurchaseAddress, type: :model do
       end
 
       it 'prefecture_idが---を選択すると登録できない' do
-         @purchase_address.prefecture_id = '1'
+         @purchase_address.prefecture_id = 1
          @purchase_address.valid?
          expect(@purchase_address.errors.full_messages).to include("Prefecture must be other than 1")
       end
@@ -76,6 +84,13 @@ RSpec.describe PurchaseAddress, type: :model do
          @purchase_address.valid?
          expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
       end
+
+      it 'phone_numberは英数混合では登録できない' do
+         @purchase_address.phone_number= '070abcd8633'
+         @purchase_address.valid?
+         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
     end
   end
 
