@@ -38,15 +38,13 @@ before_action :move_to_index1, only: [:index, :create]
     if current_user.id == @item.user_id
     redirect_to root_path
     end
+  end
   
   def move_to_index1
     if @item.purchase != nil
       redirect_to root_path
     end
     end
-  end
-
-
   end
 
  
