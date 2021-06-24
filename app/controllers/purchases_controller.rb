@@ -35,13 +35,11 @@ before_action :move_to_index1, only: [:index, :create]
   end
 
   def move_to_index
-    # @item = Item.find(params[:item_id])
     if current_user.id == @item.user_id
     redirect_to root_path
     end
   
   def move_to_index1
-    # @item = Item.find(params[:item_id])
     if @item.purchase != nil
       redirect_to root_path
     end
